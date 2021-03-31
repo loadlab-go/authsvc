@@ -15,9 +15,9 @@ import (
 )
 
 var (
-	flagListenAddr      = flag.String("listen", ":8081", "listen address")
+	flagListenAddr      = flag.String("listen", ":8080", "listen address")
 	flagEtcdEndpoints   = flag.String("etcd-endpoints", "localhost:2379", "etcd endpoints")
-	flagAdvertiseClient = flag.String("advertise-client", "localhost:8081", "advertise client url")
+	flagAdvertiseClient = flag.String("advertise-client", "localhost:8080", "advertise client url")
 )
 
 func main() {

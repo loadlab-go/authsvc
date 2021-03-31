@@ -19,6 +19,6 @@ RUN go build -o app
 
 FROM busybox
 
-COPY --from=builder /build/app /
+COPY --from=builder /build/app /authsvc
 
-CMD /app -etcd-endpoints $ETCD_ENDPOINTS
+CMD /authsvc -etcd-endpoints $ETCD_ENDPOINTS

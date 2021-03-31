@@ -9,7 +9,7 @@ import (
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
-	"github.com/loadlab-go/authsvc/idl/proto/authpb"
+	authpb "github.com/loadlab-go/pkg/proto/auth"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )

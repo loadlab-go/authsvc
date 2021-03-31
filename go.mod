@@ -1,4 +1,4 @@
-module github.com/loadlab-go/authsvc
+module github.com/loadlab-go-go/authsvc
 
 go 1.16
 

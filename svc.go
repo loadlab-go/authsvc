@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/loadlab-go/authsvc/idl/proto/authpb"
+	"github.com/loadlab-go-go/authsvc/idl/proto/authpb"
 	"go.uber.org/zap"
 )
 

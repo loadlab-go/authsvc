@@ -18,6 +18,7 @@ var (
 	flagListenAddr      = flag.String("listen", ":8080", "listen address")
 	flagEtcdEndpoints   = flag.String("etcd-endpoints", "localhost:2379", "etcd endpoints")
 	flagAdvertiseClient = flag.String("advertise-client", "localhost:8080", "advertise client url")
+	flagJWTKey          = flag.String("jwt-key", "this is secret", "jwt key")
 )
 
 func main() {
@@ -32,9 +33,6 @@ func main() {
 		}
 	}()
 
-	mustDiscoverServices()
-	logger.Info("discover services succeed")
-
 	srv := grpc.NewServer(
 		grpc.StreamInterceptor(grpc_middleware.ChainStreamServer(
 			grpc_recovery.StreamServerInterceptor(),
@@ -43,8 +41,8 @@ func main() {
 			grpc_recovery.UnaryServerInterceptor(),
 		)))
 
-	as := &authSvc{}
-	authpb.RegisterAuthServer(srv, as)
+	js := &jwtSvc{Key: []byte(*flagJWTKey)}
+	authpb.RegisterJWTServer(srv, js)
 
 	l, err := net.Listen("tcp", *flagListenAddr)
 	if err != nil {

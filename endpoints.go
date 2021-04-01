@@ -9,9 +9,7 @@ import (
 	"github.com/cenkalti/backoff/v4"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/naming/endpoints"
-	"go.etcd.io/etcd/client/v3/naming/resolver"
 	"go.uber.org/zap"
-	"google.golang.org/grpc"
 )
 
 var etcdCli *clientv3.Client
@@ -88,16 +86,4 @@ func register(advertiseClient string) (<-chan *clientv3.LeaseKeepAliveResponse, 
 
 	logger.Info("register endpoint succeed", zap.Any("endpoint", ep))
 	return keepAliveRespCh, nil
-}
-
-func grpcDial(svc string) (*grpc.ClientConn, error) {
-	res, err := resolver.NewBuilder(etcdCli)
-	if err != nil {
-		return nil, fmt.Errorf("new resolver failed: %v", err)
-	}
-	cc, err := grpc.Dial(fmt.Sprintf("etcd:///%v", svc), grpc.WithInsecure(), grpc.WithResolvers(res))
-	if err != nil {
-		return nil, fmt.Errorf("grpc dial failed: %v", err)
-	}
-	return cc, nil
 }

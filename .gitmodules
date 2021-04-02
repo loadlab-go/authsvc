@@ -1,3 +1,0 @@
-[submodule "idl"]
-	path = idl
-	url = git@github.com:loadlab-go/idl.git
